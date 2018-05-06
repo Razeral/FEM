@@ -1,2 +1,0 @@
-# WhyAreWeEvenDoingThis
-FEM sucks.
