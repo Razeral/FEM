@@ -1,28 +1,10 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
 (function() {
     "use strict";
 
     var client, // Connection to the Azure Mobile App backend
         store,  // Sqlite store to use for offline data sync
         syncContext, // Offline data sync context
-        tableName = 'todoitem',
+        tableName = 'reportstable',
         todoItemTable; // Reference to a table endpoint on backend
 
     // Set useOfflineSync to true to use tables from local store.
@@ -40,7 +22,7 @@
     function onDeviceReady() {
         // Create a connection reference to our Azure Mobile Apps backend 
         client = new WindowsAzure.MobileServiceClient('https://rafa2poc.azurewebsites.net');
-
+        //alert("HELLO");
         if (useOfflineSync) {
             initializeStore().then(setup);
         } else {
@@ -60,10 +42,14 @@
             name: tableName,
             columnDefinitions: {
                 id: 'string',
+                version: 'string',
                 deleted: 'boolean',
-                text: 'string',
-                complete: 'boolean',
-                version: 'string'
+                name: 'string',
+                email: 'string',
+                mobile: 'string',
+                description: 'string',
+                metajson: 'string'
+                
             }
         }).then(function() {
             // Initialize the sync context
@@ -82,7 +68,7 @@
                 }
             };
 
-            return syncContext.initialize(store);
+            return syncContext.initialize(store);   
         });
     }
     
@@ -97,13 +83,14 @@
         } else {
             todoItemTable = client.getTable(tableName);
         }
+        console.log(tableName);
 
         // Refresh the todoItems
-        refreshDisplay();
+        //refreshDisplay();
 
         // Wire up the UI Event Handler for the Add Item
-        $('#add-item').submit(addItemHandler);
-        $('#refresh').on('click', refreshDisplay);
+        $('#submitBtn').on('click', addItemHandler);
+        //$('#refresh').on('click', refreshDisplay);
     }
 
     /**
@@ -140,7 +127,7 @@
     function displayItems() {
         // Execute a query for uncompleted items and process
         todoItemTable
-            .where({ complete: false })     // Set up the query
+            //.where({ complete: false })     // Set up the query
             .read()                         // Read the results
             .then(createTodoItemList, handleError);
     }
@@ -195,7 +182,7 @@
     function handleError(error) {
         var text = error + (error.request ? ' - ' + error.request.status : '');
         console.error(text);
-        $('#errorlog').append($('<li>').text(text));
+        //$('#errorlog').append($('<li>').text(text));
     }
 
     /**
@@ -214,7 +201,8 @@
      * @returns {void}
      */
     function addItemHandler(event) {
-        var textbox = $('#new-item-text'),
+        //alert("Triggered");
+        /*var textbox = $('#new-item-text'),
             itemText = textbox.val();
 
         updateSummaryMessage('Adding New Item');
@@ -226,6 +214,28 @@
         }
 
         textbox.val('').focus();
+        event.preventDefault();*/
+        console.log("Inserting");
+        var nametextbox = $('#name-text'),
+            nameitemText = nametextbox.val(),
+            emailtextbox = $('#email-text'),
+            emailitemText = emailtextbox.val(),
+            mobiletextbox = $('#mobile-text'),
+            mobileitemText = mobiletextbox.val(),
+            desctextbox = $('#description-text'),
+            descitemText = desctextbox.val();
+
+        //updateSummaryMessage('Adding New Item');
+        //if (nameitemText !== '') {    // ignore validation for now
+            todoItemTable.insert({
+                name: nameitemText,
+                email: emailitemText,
+                mobile: mobileitemText,
+                description: descitemText
+            }).then(displayItems, handleError);
+        //}
+
+        //textbox.val('').focus();
         event.preventDefault();
     }
 
@@ -235,13 +245,13 @@
      * @returns {void}
      */
     function deleteItemHandler(event) {
-        var itemId = getTodoItemId(event.currentTarget);
+        /*var itemId = getTodoItemId(event.currentTarget);
 
         updateSummaryMessage('Deleting Item in Azure');
         todoItemTable
             .del({ id: itemId })   // Async send the deletion to backend
             .then(displayItems, handleError); // Update the UI
-        event.preventDefault();
+        event.preventDefault();*/
     }
 
     /**
@@ -250,14 +260,14 @@
      * @returns {void}
      */
     function updateItemTextHandler(event) {
-        var itemId = getTodoItemId(event.currentTarget),
+        /*var itemId = getTodoItemId(event.currentTarget),
             newText = $(event.currentTarget).val();
 
         updateSummaryMessage('Updating Item in Azure');
         todoItemTable
             .update({ id: itemId, text: newText })  // Async send the update to backend
             .then(displayItems, handleError); // Update the UI
-        event.preventDefault();
+        event.preventDefault();*/
     }
 
     /**
@@ -266,12 +276,12 @@
      * @returns {void}
      */
     function updateItemCompleteHandler(event) {
-        var itemId = getTodoItemId(event.currentTarget),
+        /*var itemId = getTodoItemId(event.currentTarget),
             isComplete = $(event.currentTarget).prop('checked');
 
         updateSummaryMessage('Updating Item in Azure');
         todoItemTable
             .update({ id: itemId, complete: isComplete })  // Async send the update to backend
-            .then(displayItems, handleError);        // Update the UI
+            .then(displayItems, handleError);        // Update the UI*/
     }
 })();
