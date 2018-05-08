@@ -48,7 +48,8 @@
                 email: 'string',
                 mobile: 'string',
                 description: 'string',
-                metajson: 'string'
+                metajson: 'string',
+                image: 'string'
                 
             }
         }).then(function() {
@@ -150,11 +151,11 @@
      * @returns {jQuery} jQuery DOM object
      */
     function createTodoItem(item) {
-        return $('<li>')
+        /*return $('<li>')
             .attr('data-todoitem-id', item.id)
             .append($('<button class="item-delete">Delete</button>'))
             .append($('<input type="checkbox" class="item-complete">').prop('checked', item.complete))
-            .append($('<div>').append($('<input class="item-text">').val(item.text)));
+            .append($('<div>').append($('<input class="item-text">').val(item.text)));*/
     }
 
     /**
@@ -164,14 +165,14 @@
      */
     function createTodoItemList(items) {
         // Cycle through each item received from Azure and add items to the item list
-        var listItems = $.map(items, createTodoItem);
+        /*var listItems = $.map(items, createTodoItem);
         $('#todo-items').empty().append(listItems).toggle(listItems.length > 0);
-        $('#summary').html('<strong>' + items.length + '</strong> item(s)');
+        $('#summary').html('<strong>' + items.length + '</strong> item(s)');*/
 
         // Wire up the event handlers for each item in the list
-        $('.item-delete').on('click', deleteItemHandler);
+        /*$('.item-delete').on('click', deleteItemHandler);
         $('.item-text').on('change', updateItemTextHandler);
-        $('.item-complete').on('change', updateItemCompleteHandler);
+        $('.item-complete').on('change', updateItemCompleteHandler);*/
     }
 
     /**
