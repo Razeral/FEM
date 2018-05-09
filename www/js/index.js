@@ -234,9 +234,13 @@
         if (!checkIfEmailRegistered(emailitemText)) {
         //trigger insert
         
-            alert("new email registered")
-        
-        
+            alert("new email registered"); 
+            console.log("new email registered to table");
+            
+            emailsTable.insert({
+                email: emailitemText
+            });
+            console.log("email inserted");
         //mtrigger otp
        
         //return; 
@@ -278,7 +282,8 @@
                 mobile: mobileitemText,
                 description: descitemText,
                 image: imageitemText
-            }).then(displayItems, handleError);
+            });
+         //   }).then(displayItems, handleError);
         //}
 
         //textbox.val('').focus();
@@ -290,9 +295,9 @@
     function checkIfEmailRegistered(email) {
         emailsTable
         .where({ email: emailitemText })     // Set up the query
-        .read()                         // Read the results
-        .then(createTodoItemList, handleError);
-                
+        .read();                         // Read the results
+        
+        return (emailsTable.length > 0);
                 
     }
 
