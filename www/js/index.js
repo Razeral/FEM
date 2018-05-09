@@ -76,7 +76,7 @@
      * Set up the tables, event handlers and load data from the server 
      */
     function setup() {
-
+        
         // Create a table reference
         if (useOfflineSync) {
             todoItemTable = client.getSyncTable(tableName);
@@ -201,7 +201,7 @@
      * @returns {void}
      */
     function addItemHandler(event) {
-        //alert("Triggered");
+        alert("Triggered");
         /*var textbox = $('#new-item-text'),
             itemText = textbox.val();
 
