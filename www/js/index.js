@@ -237,7 +237,7 @@
             alert("new email registered")
         
         
-        //trigger otp
+        //mtrigger otp
        
         //return; 
         }
