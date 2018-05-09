@@ -5,7 +5,9 @@
         store,  // Sqlite store to use for offline data sync
         syncContext, // Offline data sync context
         tableName = 'reportstable',
-        todoItemTable; // Reference to a table endpoint on backend
+        todoItemTable, // Reference to a table endpoint on backend
+        emailTableName = 'emailstable',
+        emailTable;
 
     // Set useOfflineSync to true to use tables from local store.
     // Set useOfflineSync to false to use tables on the server.
@@ -83,8 +85,9 @@
             todoItemTable = client.getSyncTable(tableName);
         } else {
             todoItemTable = client.getTable(tableName);
+            emailsTable = client.getTable(emailTableName);
         }
-        console.log(tableName);
+        console.log(tableName + " || " + emailTableName);
 
         // Refresh the todoItems
         //refreshDisplay();
@@ -216,18 +219,8 @@
 
         textbox.val('').focus();
         
-        console.log("checking email");
-        if (!checkIfEmailRegistered(emailitemText)) {
-        //trigger insert
-        
-        
-        //trigger otp
-       
-        //return; 
-        }
-        
         event.preventDefault();*/
-        console.log("Inserting");
+        
         var nametextbox = $('#name-text'),
             nameitemText = nametextbox.val(),
             emailtextbox = $('#email-text'),
@@ -236,6 +229,23 @@
             mobileitemText = mobiletextbox.val(),
             desctextbox = $('#description-text'),
             descitemText = desctextbox.val();
+        
+        console.log("checking email");
+        if (!checkIfEmailRegistered(emailitemText)) {
+        //trigger insert
+        
+            alert("new email registered")
+        
+        
+        //trigger otp
+       
+        //return; 
+        }
+        else
+            console.log("email found in table - " + emailitemText);
+        
+        console.log("Inserting");
+       
 
 
         // DO IMAGE > Base64 conversion > imahe
@@ -278,7 +288,12 @@
     }
     
     function checkIfEmailRegistered(email) {
-    
+        emailsTable
+        .where({ email: emailitemText })     // Set up the query
+        .read()                         // Read the results
+        .then(createTodoItemList, handleError);
+                
+                
     }
 
     function convertToBase64(path) {
