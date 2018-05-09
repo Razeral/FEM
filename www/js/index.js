@@ -37,6 +37,8 @@
 
     /**
      * Set up and initialize the local store.
+     *
+     * @returns {object} the store object
      */
     function initializeStore() {
         // Create the sqlite store
@@ -119,6 +121,8 @@
      * Synchronize local table with the table on the server.
      * We do this by pushing local changes to the server and then
      * pulling the latest changes from the server.
+     *
+     * @returns {object} the synced table
      */
     function syncLocalTable() {
         return syncContext
@@ -157,17 +161,17 @@
      * @returns {jQuery} jQuery DOM object
      */
     function createTodoItem(item) {
-        /*return $('<li>')
+        return $('<li>')
             .attr('data-todoitem-id', item.id)
             .append($('<button class="item-delete">Delete</button>'))
             .append($('<input type="checkbox" class="item-complete">').prop('checked', item.complete))
-            .append($('<div>').append($('<input class="item-text">').val(item.text)));*/
+            .append($('<div>').append($('<input class="item-text">').val(item.text)));
     }
 
     /**
      * Create a list of Todo Items
      * @param {TodoItem[]} items an array of todoitem objects
-     * @returns {void
+     * @returns {void}
      */
     function createTodoItemList(items) {
         // Cycle through each item received from Azure and add items to the item list
@@ -281,7 +285,7 @@
         console.log("Results: " + results.length);
         console.log("Results: " + results + " ||| email -> " + emailVar);
 
-        if (results.length == 0) {
+        if (results.length === 0) {
             console.log("Inserting new email");
             emailTable.insert({
                 email: emailVar

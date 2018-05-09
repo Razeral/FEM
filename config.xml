@@ -97,8 +97,8 @@
     <plugin name="cordova-plugin-inappbrowser" spec="~1.5.0" />
     <plugin name="cordova-sqlite-storage" spec="~2.2.0" />
     <vs:toolsetVersion>6.3.1</vs:toolsetVersion>
-    <engine name="android" spec="5.2.1" />
+    <plugin name="cordova-plugin-ms-azure-mobile-apps" spec="~2.0.1" />
+    <engine name="android" spec="^5.2.1" />
     <engine name="ios" spec="4.2.0" />
     <engine name="windows" spec="4.4.2" />
-    <plugin name="cordova-plugin-ms-azure-mobile-apps" spec="~2.0.1" />
 </widget>

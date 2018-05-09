@@ -50,6 +50,8 @@
 
     /**
      * Set up and initialize the local store.
+     *
+     * @returns {object} the local store
      */
     function initializeStore() {
         // Create the sqlite store
@@ -125,6 +127,8 @@
      * Synchronize local table with the table on the server.
      * We do this by pushing local changes to the server and then
      * pulling the latest changes from the server.
+     *
+     * @returns {object} the synced local table
      */
     function syncLocalTable() {
         return syncContext
