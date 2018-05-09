@@ -215,6 +215,17 @@
         }
 
         textbox.val('').focus();
+        
+        console.log("checking email");
+        if (!checkIfEmailRegistered(emailitemText)) {
+        //trigger insert
+        
+        
+        //trigger otp
+       
+        //return; 
+        }
+        
         event.preventDefault();*/
         console.log("Inserting");
         var nametextbox = $('#name-text'),
@@ -264,6 +275,10 @@
 
         console.log("Insert end");
         event.preventDefault();
+    }
+    
+    function checkIfEmailRegistered(email) {
+    
     }
 
     function convertToBase64(path) {
