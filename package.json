@@ -2,7 +2,7 @@
     "name": "ZUMOAPPNAME",
     "version": "1.0.0",
     "dependencies": {
-        "cordova-android": "5.2.1",
+        "cordova-android": "^5.2.1",
         "cordova-ios": "4.2.0",
         "cordova-windows": "4.4.2"
     },
@@ -11,6 +11,9 @@
             "android",
             "ios",
             "windows"
-        ]
+        ],
+        "plugins": {
+            "cordova-plugin-ms-azure-mobile-apps": {}
+        }
     }
 }
