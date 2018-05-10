@@ -1,4 +1,4 @@
-(function() {
+(function () {
     "use strict";
 
     var client, // Connection to the Azure Mobile App backend
@@ -24,15 +24,12 @@
      */
     function onDeviceReady() {
         // Create a connection reference to our Azure Mobile Apps backend
-        //alert("HELLO");
         client = new WindowsAzure.MobileServiceClient('https://rafa2poc.azurewebsites.net');
-        //alert("HELLO");
         if (useOfflineSync) {
             initializeStore().then(setup);
         } else {
             setup();
         }
-        //alert("Setup Done");
     }
 
     /**
@@ -100,6 +97,7 @@
         // Wire up the UI Event Handler for the Add Item
         $('#submitBtn').on('click', addItemHandler);
         //$('#refresh').on('click', refreshDisplay);
+        $('#startBtn').on('click', launchCamera);
     }
 
     /**
@@ -205,6 +203,38 @@
     function getTodoItemId(el) {
         return $(el).closest('li').attr('data-todoitem-id');
     }
+
+    /////////////////////////////////////////////////////////////////////////////////
+
+    //=====================================================
+    //=== IMAGE SUCCESS/FAIL                               
+    //=====================================================
+    // Update DOM on a Received Event
+    function launchCamera() {
+        alert('hello!');
+        navigator.camera.getPicture(onPhotoSuccess, onFail, {
+            quality: 50,
+            destinationType: Camera.DestinationType.FILE_URI
+        });
+
+    };
+
+    //-- photo taken successfully
+    function onPhotoSuccess(imageURI) {
+        //alert('success: ' + imageURI);
+        //window.location = "input-page.html";
+        getExif(imageURI);
+        //alert(imageURI.toString());
+        getBase64(imageURI.toString(), function (base64file) {
+            //alert("Success");
+        });
+    };
+
+    function onFail(error) {
+        console.log('Fail:' + error);
+    };
+
+
 
     /**
      * Event handler for when the user enters some text and clicks on Add

@@ -4,6 +4,8 @@
     "dependencies": {
         "cordova-android": "^5.2.1",
         "cordova-ios": "4.2.0",
+        "cordova-plugin-device": "^2.0.2",
+        "cordova-plugin-ms-azure-mobile-apps": "^2.0.1",
         "cordova-windows": "4.4.2"
     },
     "cordova": {
@@ -13,6 +15,7 @@
             "windows"
         ],
         "plugins": {
+            "cordova-plugin-device": {},
             "cordova-plugin-ms-azure-mobile-apps": {}
         }
     }
