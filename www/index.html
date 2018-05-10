@@ -17,7 +17,9 @@
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <!-- <script type="text/javascript" src="js/test.js"></script>  type="textarea" id="description" placeholder="Description"></input> -->
-    <!--<script type="text/javascript" src="exif.js"></script>-->
+    <script type="text/javascript" src="js/exif.js"></script>
+    <script type="text/javascript" src="js/MobileServices.Cordova.Ext.js"></script>
+    <script type="text/javascript" src="js/MobileServices.Cordova.js"></script>
 
 
 
@@ -32,13 +34,14 @@
 
             <button id="startBtn">Take a photo</button>
             <!--<img id="myImage" width="100%" height="100%"/>-->
-            <img id="myImage" src="https://femsblobstore.blob.core.windows.net/storev0/irczenrx.jpeg" style="width:100%"/>
-            
+            <img id="myImage" src="https://femsblobstore.blob.core.windows.net/storev0/irczenrx.jpeg" style="width:100%" />
+
             <span id="allMetaDataSpan"></span>
             <p> Name: <input type="text" id="name-text" placeholder="Name" /></p>
             <p> Email: <input type="text" id="email-text" placeholder="Email" /></p>
             <p> Mobile: <input type="text" id="mobile-text" placeholder="Mobile Number" /></p>
-            <p> Description: <textarea name="description" id="description-text" cols="30" rows="10"></textarea></p>
+            <p> Description: <textarea rows="3" name="description" id="description-text" cols="30" rows="10"></textarea></p>
+            <p> Metadata: <textarea readonly rows="2" name="metadata" id="metadata-text" cols="30" rows="10"></textarea></p>
             <!--<button id="submitBtn" onclick="hitButton();">Submit</button>-->
             <button id="submitBtn">Add</button>
             <p></p>
