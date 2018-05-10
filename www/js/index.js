@@ -393,12 +393,14 @@
     }
 
     function successItemInsert() {
+        $("#myImage").attr("src", "");
         $("#name-text").val('');
         $("#email-text").val('');
         $("#mobile-text").val('');
         $("#description-text").val('');
         $("#metadata-text").val('');
         console.log("Item insert successful");
+        alert("Report sent!");
     }
     
     function checkIfEmailRegistered(emailitemText) {
