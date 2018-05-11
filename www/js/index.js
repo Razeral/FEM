@@ -428,6 +428,7 @@
                 email: emailVar
             }).then(successEmailInsert, handleError);
             console.log("Inserting new email - done");
+            alert("New email added to list");
         }
         else {
             console.log("Email already registered");
